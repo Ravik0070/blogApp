@@ -1,8 +1,5 @@
 import Home from "./pages/Home";
 import {
-  BrowserRouter,
-  Routes,
-  Route,
   createBrowserRouter,
   RouterProvider,
   Outlet,
