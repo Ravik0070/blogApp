@@ -11,7 +11,6 @@ const Single = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const postId = location.pathname.split("/")[2]
-
   const { currentUser } = useContext(AuthContext)
   useEffect(() => {
     const fetchData = async () => {
@@ -26,7 +25,7 @@ const Single = () => {
     fetchData()
   }, [postId])
 
-  const handleDelete = async() =>{
+  const handleDelete = async () => {
     try {
       await axios.delete(`/posts/${postId}`)
       navigate("/")
@@ -47,16 +46,15 @@ const Single = () => {
           {currentUser?.username === post.username &&
             <div className="edit">
               <Link to="/write?edit=2"><img src={Edit} alt="" /></Link>
-
               <img onClick={handleDelete} src={Delete} alt="" />
             </div>
-          } 
+          }
         </div>
         <h1>{post?.title}</h1>
         <p>{post?.description}
         </p>
       </div>
-      <div className="menu"><Menu /></div>
+      <div className="menu"><Menu cat={post.cat} /></div>
     </div>
   )
 }

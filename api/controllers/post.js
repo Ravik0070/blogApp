@@ -35,10 +35,12 @@ export const deletePost = async (req, res) => {
     if (err) return res.status(403).json("Token is not valid!");
     const postId = req.params.id;
     let pool = await sql.connect(config);
-    let query = "DELETE FROM blogs WHERE id=@id"
+    let query = "DELETE FROM blogs WHERE id=@id AND uid=@uid";
+
     let result = await pool
       .request()
-      .input("id", sql.NVarChar(1000), req.params.id)
+      .input("id", sql.Int, req.params.id)
+      .input("uid", sql.Int, userInfo.id)
       .query(query);
     return res.json({ success: true, response: "DELETED" });
   });
